@@ -14,8 +14,14 @@
     <script src="https://kit.fontawesome.com/7023acb312.js" crossorigin="anonymous"></script>
   </head>
   <body>
+    <div class="bg"></div>
+
+    <nav>
+
+    </nav>
+
     <div class="feed">
-      <div class="top">
+      <div class="top" id="top">
         <h2><span class="fas fa-comments"></span> Feed</h2>
       </div>
       <form class="messageBox" action="index.html" method="post">
@@ -28,12 +34,55 @@
       </form>
       <div class="posts">
         <section>
-          <h2><span>Gebruiker</span> - Titel</h2>
-          <p>hallo</p>
-          <img src="https://cdn.shopify.com/s/files/1/0039/4225/2662/products/product-image-438717472.jpg?v=1538384920" alt="">
-
+          <img src="img/defaultuser.jpg" alt="" class="profilePicture">
+          <h2>Gebruiker</h2>
+          <h3>Test titel</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="icons">
+            <h5 class="fas fa-heart"> <span>0</span></h5>
+          </div>
         </section>
+        <section>
+          <img src="img/defaultuser.jpg" alt="" class="profilePicture">
+          <h2>Gebruiker</h2>
+          <h3>Test titel</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="icons">
+            <h5 class="fas fa-heart"> <span>0</span></h5>
+          </div>
+        </section>
+        <section>
+          <img src="img/defaultuser.jpg" alt="" class="profilePicture">
+          <h2>Gebruiker</h2>
+          <h3>Test titel</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="icons">
+            <h5 class="fas fa-heart"> <span>0</span></h5>
+          </div>
+        </section>
+        <section>
+          <img src="img/defaultuser.jpg" alt="" class="profilePicture">
+          <h2>Gebruiker</h2>
+          <h3>Test titel</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="icons">
+            <h5 class="fas fa-heart"> <span>0</span></h5>
+          </div>
+        </section>
+        <section>
+          <img src="img/defaultuser.jpg" alt="" class="profilePicture">
+          <h2>Gebruiker</h2>
+          <h3>Test titel</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="icons">
+            <h5 class="fas fa-heart"> <span>0</span></h5>
+          </div>
+        </section>
+
+        <h3 class="end">Dat was alles!</h3>
+        <a href="#top" class="fas fa-angle-double-up"></a>
       </div>
     </div>
+
   </body>
 </html>

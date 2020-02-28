@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Satisfy&display=swap');
 
 body {
   margin: 0;
@@ -6,46 +7,59 @@ body {
   font-family: sans-serif;
 }
 
+/* NOTE: achtergrond */
+.bg {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-image: url("img/background.jpg");
+  z-index: -1;
+}
+
+/* NOTE: Navigatie */
+
+
+/* NOTE: smoothscroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* NOTE: Scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* NOTE: wrapper en top */
 .feed {
   margin: 0 auto;
   padding: 0;
   width: 40%;
   height: calc(100vh - 0.1em);
-
   overflow-x: hidden;
   text-align: center;
-
   background: rgba(60, 60, 60, 1);
   border: 0.05em solid rgba(100, 100, 100, 1);
 }
-
-::-webkit-scrollbar {
-  width: 0px;
-}
-
 .top {
   margin: 0 auto;
   padding: 0;
   width: 100%;
   text-align: left;
   z-index: 2;
-
   background: rgba(60, 60, 60, 1);
-
   border-bottom: 0.05em solid rgba(100, 100, 100, 1);
 }
-
 .top h2 {
   display: inline-block;
   margin: 0.5em;
   margin-left: 1em;
   padding: 0;
-
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
   color: white;
 }
 
+/* NOTE: Bericht sectie */
 .messageBox {
   margin: 0 auto;
   width: 100%;
@@ -56,7 +70,6 @@ body {
   border-bottom: 0.5em solid rgba(100, 100, 100, 1);
   z-index: -1;
 }
-
 .messageBox textarea {
   display: block;
   margin: 0 auto;
@@ -65,14 +78,12 @@ body {
   max-width: 90%;
   min-height: 5em;
   max-height: 10em;
-
   background: transparent;
   color: white;
   border: 0;
   border-bottom: 0.05em solid rgba(100, 100, 100, 1);
   outline: none;
 }
-
 .messageBox .title {
   display: block;
   margin: 0 auto;
@@ -81,94 +92,105 @@ body {
   max-width: 90%;
   min-height: 2em;
   max-height: 2em;
-
   background: transparent;
   color: white;
   border: 0;
   border-bottom: 0.05em solid rgba(100, 100, 100, 1);
   outline: none;
 }
-
-.messageBox .title:focus {
-  border-bottom: 0.05em solid #ffac59;
-}
-
-.messageBox textarea:focus {
-  border-bottom: 0.05em solid #ffac59;
-}
-
+.messageBox .title:focus {border-bottom: 0.05em solid #ffac59;}
+.messageBox textarea:focus {border-bottom: 0.05em solid #ffac59;}
 .messageBox a {
-  opacity: 0.8;
-  float: right;
-
   margin: 2em;
   margin-top: -2em;
-  text-decoration: none;
   margin-right: 5%;
+  float: right;
   padding: 0.5em;
   padding-right: 2em;
   padding-left: 2em;
+  opacity: 0.8;
+  border-radius: 5em;
+  text-decoration: none;
   color: white;
   font-weight: bold;
   background: #ffac59;
-  border-radius: 5em;
   transition-duration: 0.4s;
 }
+.messageBox a:hover {opacity: 1; transition-duration: 0.4s;}
+.upload {margin-left: 5%;margin-bottom: 3em; color: white;}
 
-.messageBox a:hover {
-  opacity: 1;
-  transition-duration: 0.4s;
+/* NOTE: Posts sectie */
+.posts {overflow: auto; margin: 0 auto; width: 100%;}
+.posts section {text-align: left; margin: 0 auto; border-bottom: 0.05em solid rgba(100, 100, 100, 1); color: white;}
+.posts section:hover h3 {background: rgba(100, 100, 100, 1); border-bottom: 0.25em solid #444444;}
+.posts section:hover p {background: rgba(100, 100, 100, 1);}
+.posts section:hover {background: #444444;}
+
+/* NOTE: Profiel foto */
+.profilePicture {
+  margin-top: 1em;
+  margin-left: 1em;
+  border-radius: 50%;
+  opacity: 0.8;
+  width: 3em;
 }
+.profilePicture:hover {opacity: 1;}
 
-.upload {
-  margin-left: 5%;
-  margin-bottom: 3em;
-  color: white;
-}
+/* NOTE: Gebruiker van post */
+section h2 {margin-top: -1.75em; margin-left: 3em; font-weight: bold;}
+section h2:hover {text-decoration: underline;}
 
-.posts {
-  overflow: auto;
+/* NOTE: Titel post */
+section h3 {
   margin: 0 auto;
-  width: 100%;
-}
-
-.posts section {
-  text-align: left;
-  margin: 0 auto;
-  border-bottom: 0.05em solid rgba(100, 100, 100, 1);
-  color: white;
-}
-
-section h2 {
-  margin: 0;
+  margin-top: 2em;
+  padding: 0.5rem;
   padding-top: 1em;
-  margin-left: 2vw;
-  font-weight: lighter;
-}
-h2 span {
+  width: 90%;
+  background: #444444;
+  border-bottom: 0.1em solid rgba(60, 60, 60, 1);
   font-weight: bold;
-  cursor: pointer;
-
+  border-top-left-radius: .75rem;
 }
 
-h2 span:hover {
-  text-decoration: underline;
-}
-section p {
-  margin: 0;
-  margin-left: 2vw;
-  margin-bottom: 1em;
-}
-section img {
+/* NOTE: Tekst van post */
+section p {margin: 0 auto; width: 90%; padding: 0.5rem; background: #444444; border-bottom-right-radius: .75rem; margin-bottom: 1em;}
+
+/* NOTE: Plaatje post */
+.postImg {
   text-align: center;
   height: 400px;
   width: 50%;
   object-fit: cover;
   object-position: top;
-
 }
 
-
-.posts section:hover {
-  background: #444444;
+/* NOTE: Icoontjes post */
+.icons {
+  margin: 0 auto;
+  width: 90%;
+  text-align: right;
+  font-size: 1.5em;
 }
+.icons h5 {cursor: pointer;}
+.icons h5:hover {color: red; text-shadow: 0px 0px 1em red;}
+h5 span {font-family: sans-serif; font-weight: lighter;}
+
+/* NOTE: einde van alle posts */
+.end {
+  margin: 0 auto;
+  margin-top: 1em;
+  margin-bottom: 0;
+  width: 100%;
+  padding: 0;
+  text-align: center;
+
+  border-radius: 0;
+  border: 0;
+  font-family: 'Satisfy', sans-serif;
+  font-weight: lighter;
+  font-size: 3em;
+  color: #ffac59;
+}
+.fa-angle-double-up {color: #ffac59; margin-bottom: 1em; margin-top: 0.5em; font-size: 2em; font-weight: lighter; text-decoration: none; transition-duration: 0.4s;}
+.fa-angle-double-up:hover {text-shadow: 0px 0px 1em #ffac59; margin-top: 0; transition-duration: 0.4s;}
