@@ -77,7 +77,7 @@ html {
   min-width: 90%;
   max-width: 90%;
   min-height: 5em;
-  max-height: 10em;
+  max-height: 25em;
   background: transparent;
   color: white;
   border: 0;
@@ -122,7 +122,7 @@ html {
 /* NOTE: Posts sectie */
 .posts {overflow: auto; margin: 0 auto; width: 100%;}
 .posts section {text-align: left; margin: 0 auto; border-bottom: 0.05em solid rgba(100, 100, 100, 1); color: white;}
-.posts section:hover h3 {background: rgba(100, 100, 100, 1); border-bottom: 0.25em solid #444444;}
+.posts section:hover h3 {background: rgba(100, 100, 100, 1); border-bottom: 0.1em solid #444444;}
 .posts section:hover p {background: rgba(100, 100, 100, 1);}
 .posts section:hover {background: #444444;}
 
