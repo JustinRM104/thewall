@@ -199,12 +199,12 @@ section p {
   border-radius: 2em;
   opacity: 0.8;
   cursor: pointer;
-  filter: grayscale(100%);
+  filter: sepia(30%);
   transition-duration: 0.4s;
 }
 
 .postImg:hover {
-  filter: grayscale(0%);
+  filter: sepia(0%);
   width: 13vw;
   height: 13vw;
   opacity: 1;

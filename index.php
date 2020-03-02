@@ -37,34 +37,36 @@
       <div class="posts">
         <section>
           <div class="icons">
-            <h5 class="fas fa-heart like"> <span>0</span></h5>
+            <h5 class="fas fa-heart like"> <span>79</span></h5>
             <h5 class="fas fa-bookmark save"> <span></span></h5>
           </div>
           <img src="img/defaultuser.jpg" alt="" class="profilePicture">
-          <h2>Gebruiker<span> · 27 feb. 2020</span></h2>
-          <h3>Test titel</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <h2>Wellgosh<span> · 2 mar. 2020</span></h2>
+          <img src="https://scontent-amt2-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87630083_138513844339447_2846496651007839911_n.jpg?_nc_ht=scontent-amt2-1.cdninstagram.com&_nc_cat=107&_nc_ohc=hpFvVePIhD8AX9OkM8P&oh=8f38020382531ff2216cfe53dbd1b561&oe=5E8478C9" alt="foto" class="postImg">
+          <h3>Pine Green</h3>
+          <p>Still in the Christmas feeling...</p>
         </section>
         <section>
           <div class="icons">
-            <h5 class="fas fa-heart like"> <span>0</span></h5>
+            <h5 class="fas fa-heart like"> <span>56</span></h5>
             <h5 class="fas fa-bookmark save"> <span></span></h5>
           </div>
           <img src="img/defaultuser.jpg" alt="" class="profilePicture">
-          <h2>Gebruiker<span> · 27 feb. 2020</span></h2>
-          <h3>Test titel</h3>
-          <p>Lorem ipsum dolort, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <h2>Adidas<span> · 28 feb. 2020</span></h2>
+          <img src="https://scontent-ams4-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87723020_206132984090471_6317257326461993012_n.jpg?_nc_ht=scontent-ams4-1.cdninstagram.com&_nc_cat=111&_nc_ohc=a8zAd_1_alUAX-60EDk&oh=316ba80fbf8ae5f2c964d97ba08ca341&oe=5E9814DD" alt="foto" class="postImg">
+          <h3>Adidas x BED FORD</h3>
+          <p>Adidas reunites with buzzy new-gen Japanese fashion brand for street-ready apparel and footwear, inspired by the design heritage of adicolor.</p>
         </section>
         <section>
           <div class="icons">
-            <h5 class="fas fa-heart like"> <span>0</span></h5>
+            <h5 class="fas fa-heart like"> <span>2.909.391</span></h5>
             <h5 class="fas fa-bookmark save"> <span></span></h5>
           </div>
           <img src="img/defaultuser.jpg" alt="" class="profilePicture">
-          <h2>Gebruiker<span> · 21 feb. 2020</span></h2>
+          <h2>BSTN<span> · 21 feb. 2020</span></h2>
           <img src="https://scontent-ams4-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87740525_191727465413498_4868163905584137233_n.jpg?_nc_ht=scontent-ams4-1.cdninstagram.com&_nc_cat=1&_nc_ohc=vCh61CECTxcAX_gjWFa&oh=9347444b535879dbb08f7c79e8fcdd75&oe=5E89E527" alt="foto" class="postImg">
-          <h3>Test titel</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <h3>Ralph Lauren x Carhartt</h3>
+          <p>Carhartt WIP meets Polo Ralph Lauren to collaborate</p>
         </section>
       </div>
       <h3 class="end">Dat was alles!</h3>
