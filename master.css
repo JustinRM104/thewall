@@ -3,7 +3,7 @@
 
 body {
   margin: 0;
-  background: rgba(60, 60, 60, 1);
+  background: rgba(255, 255, 255, 1);
   font-family: sans-serif;
 }
 
@@ -13,7 +13,6 @@ body {
   top: 0;
   width: 100%;
   height: 100vh;
-  background-image: url("img/background.jpg");
   z-index: -1;
 }
 
@@ -33,15 +32,12 @@ html {
 /* NOTE: wrapper en top */
 .feed {
   margin: 0 auto;
-  margin-top: 5vh;
   padding: 0;
   width: 40%;
-  height: calc(90vh);
-  overflow: auto;
+  min-height: calc(100vh - 0.1em);
   text-align: center;
-  background: rgba(60, 60, 60, 1);
-  border: 0.05em solid rgba(100, 100, 100, 1);
-  border-radius: 1em;
+  background: rgba(255, 255, 255, 1);
+  border: 0.05em solid rgba(100, 100, 100, 0.5);
 }
 .top {
   margin: 0 auto;
@@ -49,8 +45,8 @@ html {
   width: 100%;
   text-align: left;
   z-index: 2;
-  background: rgba(60, 60, 60, 1);
-  border-bottom: 0.05em solid rgba(100, 100, 100, 1);
+  background: white;
+  border-bottom: 0.05em solid rgba(100, 100, 100, 0.5);
 }
 .top h2 {
   display: inline-block;
@@ -58,8 +54,8 @@ html {
   margin-left: 1em;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  font-weight: normal;
-  color: white;
+  font-weight: bolder;
+  color: black;
 }
 
 /* NOTE: Bericht sectie */
@@ -68,9 +64,9 @@ html {
   width: 100%;
   padding-top: 1em;
   padding-bottom: 1em;
-  text-align: left;
-  background: #444444;
-  border-bottom: 0.5em solid rgba(100, 100, 100, 1);
+  text-align: center;
+  background: white;
+  border-bottom: 0.5em solid rgba(100, 100, 100, 0.5);
   z-index: -1;
 }
 .messageBox textarea {
@@ -80,11 +76,14 @@ html {
   min-width: 90%;
   max-width: 90%;
   min-height: 5em;
-  max-height: 25em;
+  height: 5em;
+  max-height: 20em;
   background: transparent;
-  color: white;
+  color: black;
   border: 0;
-  border-bottom: 0.05em solid rgba(100, 100, 100, 1);
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.15rem;
+  border-bottom: 0.05em solid rgba(100, 100, 100, 0.5);
   outline: none;
 }
 .messageBox .title {
@@ -95,43 +94,69 @@ html {
   max-width: 90%;
   min-height: 2em;
   max-height: 2em;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem;
   background: transparent;
-  color: white;
+  color: black;
   border: 0;
-  border-bottom: 0.05em solid rgba(100, 100, 100, 1);
+  border-bottom: 0.05em solid rgba(100, 100, 100, 0.5);
   outline: none;
 }
-.messageBox .title:focus {border-bottom: 0.05em solid #ffac59;}
-.messageBox textarea:focus {border-bottom: 0.05em solid #ffac59;}
+.messageBox .title:focus {border-bottom: 0.1em solid rgba(179, 205, 229, 1);}
+.messageBox textarea:focus {border-bottom: 0.1em solid rgba(179, 205, 229, 1);}
 .messageBox a {
   margin: 2em;
-  margin-top: -2em;
+  margin-top: -3em;
   margin-right: 5%;
   float: right;
-  padding: 0.5em;
+  padding: 1em;
   padding-right: 2em;
   padding-left: 2em;
-  opacity: 0.8;
+  opacity: 0.6;
   border-radius: 5em;
   text-decoration: none;
   color: white;
   font-weight: bold;
-  background: #ffac59;
+  background: rgba(29, 161, 242, 1);
   transition-duration: 0.4s;
 }
 .messageBox a:hover {opacity: 1; transition-duration: 0.4s;}
-.upload {margin-left: 5%;margin-bottom: 3em; color: white;}
+
+.functions {
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* NOTE: Upload knop */
+#custom-button {
+  margin-left: 5%;
+  margin-bottom: 7.5vh;
+  padding: .75em;
+  color: white;
+  background: rgba(29, 161, 242, 1);
+  font-weight: bolder;
+  border-radius: 5em;
+  border: 0;
+  cursor: pointer;
+  opacity: 0.6;
+  transition-duration: 0.4s;
+  outline: none;
+}
+#custom-button:hover {opacity: 1; transition-duration: 0.4s;}
+#custom-text {margin-left: 1em; font-family: sans-serif; color: #aaa;}
+.fa-file-image {font-family: 'Roboto', sans-serif;}
 
 /* NOTE: Posts sectie */
 .posts {overflow: auto; margin: 0 auto; width: 100%;}
-.posts section {text-align: left; margin: 0 auto; border-bottom: 0.05em solid rgba(100, 100, 100, 1); color: white;}
-.posts section:hover h3 {background: rgba(100, 100, 100, 1); border-bottom: 0.1em solid #444444;}
-.posts section:hover p {background: rgba(100, 100, 100, 1);}
-.posts section:hover {background: #444444;}
+.posts section {text-align: left; margin: 0 auto; border-bottom: 0.05em solid rgba(100, 100, 100, 0.5); color: white; transition-duration: 0.2s;}
+.posts section:hover {background: rgba(240, 240, 240, 1); transition-duration: 0.2s;}
+.posts section:hover p {box-shadow: 0.25rem 0.25rem .25em rgba(179, 205, 229, .5);}
+.posts section:hover .like {color: #4182be;}
 
 /* NOTE: Profiel foto */
 .profilePicture {
-  margin-top: 1em;
+  margin-top: -4em;
   margin-left: 1em;
   border-radius: 50%;
   opacity: 0.8;
@@ -140,44 +165,64 @@ html {
 .profilePicture:hover {opacity: 1;}
 
 /* NOTE: Gebruiker van post */
-section h2 {margin-top: -1.75em; margin-left: 3em; font-weight: bold;}
-section h2 span {font-size: 0.5em; font-weight: lighter;}
+section h2 {margin-top: -1.75em; margin-left: 3em; color: black; font-weight: bold;}
+section h2 span {font-size: 0.5em; color: rgba(200, 200, 200, 1); font-weight: lighter;}
 
 /* NOTE: Titel post */
 section h3 {
   margin: 0 auto;
-  margin-top: 2em;
   padding: 0.5rem;
   padding-top: 1em;
   width: 90%;
-  background: #444444;
-  border-bottom: 0.1em solid rgba(60, 60, 60, 1);
   font-weight: bold;
-  border-top-left-radius: .75rem;
-  box-shadow: 0px 0px .5em #ffac59;
+  color: black;
 }
 
 /* NOTE: Tekst van post */
-section p {margin: 0 auto; width: 90%; padding: 0.5rem; background: #444444; border-bottom-right-radius: .75rem; margin-bottom: 1em; box-shadow: 0px 0px .5em #ffac59;}
+section p {
+  margin: 0 auto;
+  width: 90%;
+  padding: 0.5rem;
+  color: black;
+  margin-bottom: 2em;
+  box-shadow: 0.25rem 0.25rem .25em rgba(200, 200, 200, .5);
+  border-bottom-right-radius: 0.4em;
+}
 
 /* NOTE: Plaatje post */
 .postImg {
-  text-align: center;
-  height: 400px;
-  width: 50%;
+  width: 12.5vw;
+  height: 12.5vw;
+  margin-left: 5%;
   object-fit: cover;
   object-position: top;
+  border-radius: 2em;
+  opacity: 0.8;
+  cursor: pointer;
+  filter: grayscale(100%);
+  transition-duration: 0.4s;
+}
+
+.postImg:hover {
+  filter: grayscale(0%);
+  width: 13vw;
+  height: 13vw;
+  opacity: 1;
+  transition-duration: 0.4s;
 }
 
 /* NOTE: Icoontjes post */
 .icons {
   margin: 0 auto;
+  margin-bottom: -1.5em;
   width: 90%;
   text-align: right;
   font-size: 1.5em;
 }
-.icons h5 {cursor: pointer;}
-.icons h5:hover {color: red; text-shadow: 0px 0px 1em red;}
+.icons .like {cursor: pointer; margin-left: .5em; color: rgba(200, 200, 200, 1);}
+.icons .like:hover {color: #4182be; text-shadow: 0px 0px 1em #4182be;}
+.icons .save {cursor: pointer; margin-left: .5em; color: rgba(200, 200, 200, 1);}
+.icons .save:hover {color:#6666ff; text-shadow: 0px 0px 1em #6666ff;}
 h5 span {font-family: sans-serif; font-weight: lighter;}
 
 /* NOTE: einde van alle posts */
@@ -194,7 +239,7 @@ h5 span {font-family: sans-serif; font-weight: lighter;}
   font-family: 'Satisfy', sans-serif;
   font-weight: lighter;
   font-size: 3em;
-  color: #ffac59;
+  color: #4182be;
 }
-.fa-angle-double-up {color: #ffac59; margin-bottom: 1em; margin-top: 0.5em; font-size: 2em; font-weight: lighter; text-decoration: none; transition-duration: 0.4s;}
-.fa-angle-double-up:hover {text-shadow: 0px 0px 1em #ffac59; margin-top: 0; transition-duration: 0.4s;}
+.fa-angle-double-up {color: #4182be; margin-bottom: 1em; margin-top: 0.5em; font-size: 2em; font-weight: lighter; text-decoration: none; transition-duration: 0.4s;}
+.fa-angle-double-up:hover {text-shadow: 0px 0px 1em #4182be; margin-top: 0; transition-duration: 0.4s;}
