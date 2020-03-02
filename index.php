@@ -68,7 +68,7 @@ catch(PDOException $e) {
             <img src="img/defaultuser.jpg" alt="" class="profilePicture">
             <h2><?php echo $row["auteur"] ?><span> · 2 mar. 2020</span></h2>
 
-            <?php if (substr($row["image"], 0, 5) == "https") {
+            <?php if (substr($row["image"], 0, 4) == "http") {
               ?> <img src="<?php echo $row["image"] ?>" alt="<?php echo $row["auteur"] ?>" class="postImg"> <?php
             }
             else {

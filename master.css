@@ -26,7 +26,12 @@ html {
 
 /* NOTE: Scrollbar */
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 0.5em;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(29, 161, 242, 1);
+  border-radius: 5em;
 }
 
 /* NOTE: wrapper en top */
