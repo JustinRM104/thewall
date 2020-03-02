@@ -153,6 +153,13 @@ html {
 .posts section:hover {background: rgba(240, 240, 240, 1); transition-duration: 0.2s;}
 .posts section:hover p {box-shadow: 0.25rem 0.25rem .25em rgba(179, 205, 229, .5);}
 .posts section:hover .like {color: #4182be;}
+.posts section:hover .postImg {
+  filter: sepia(0%);
+  width: 13vw;
+  height: 13vw;
+  opacity: 1;
+  transition-duration: 0.4s;
+}
 
 /* NOTE: Profiel foto */
 .profilePicture {
@@ -200,14 +207,6 @@ section p {
   opacity: 0.8;
   cursor: pointer;
   filter: sepia(30%);
-  transition-duration: 0.4s;
-}
-
-.postImg:hover {
-  filter: sepia(0%);
-  width: 13vw;
-  height: 13vw;
-  opacity: 1;
   transition-duration: 0.4s;
 }
 

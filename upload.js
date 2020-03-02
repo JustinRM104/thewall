@@ -12,6 +12,6 @@ realFileBtn.addEventListener("change", function() {
       /[\/\\]([\w\d\s\.\-\(\)]+)$/
     )[1];
   } else {
-    customTxt.innerHTML = "No file chosen, yet.";
+    customTxt.innerHTML = "";
   }
 });
