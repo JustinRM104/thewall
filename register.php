@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="css/register.css">
     <link rel="shortcut icon" href="img/logo.png">
-    <title>FashionSwipe | Registreer</title>
+    <title>FashaHolic | Registreer</title>
 
     <script src="https://kit.fontawesome.com/7023acb312.js" crossorigin="anonymous"></script>
   </head>

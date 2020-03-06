@@ -12,7 +12,7 @@ try {
   $allPosts = $connection->query("SELECT * FROM uploads;");
 
   // Data van registratie
-  
+
 }
 catch(PDOException $e) {
   echo "Something gone wrong while connecting to the database.";
@@ -31,7 +31,7 @@ catch(PDOException $e) {
 
     <link rel="stylesheet" href="css/master.css">
     <link rel="shortcut icon" href="img/logo.png">
-    <title>FashionSwipe | Feed</title>
+    <title>FashaHolic | Feed</title>
 
     <script src="https://kit.fontawesome.com/7023acb312.js" crossorigin="anonymous"></script>
   </head>
