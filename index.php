@@ -10,6 +10,9 @@ try {
 
   // Tabellen
   $allPosts = $connection->query("SELECT * FROM uploads;");
+
+  // Data van registratie
+  
 }
 catch(PDOException $e) {
   echo "Something gone wrong while connecting to the database.";
@@ -26,7 +29,7 @@ catch(PDOException $e) {
     <meta name="keywords" content="feed, fashion, kleding, streetware, jongvolwassen, broek, trui, verhaal, sociaal">
     <meta name="description" content="">
 
-    <link rel="stylesheet" href="master.css">
+    <link rel="stylesheet" href="css/master.css">
     <link rel="shortcut icon" href="img/logo.png">
     <title>FashionSwipe | Feed</title>
 
@@ -87,6 +90,6 @@ catch(PDOException $e) {
 
     </div>
 
-    <script src="upload.js"></script>
+    <script src="js/upload.js"></script>
   </body>
 </html>
