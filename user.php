@@ -39,6 +39,7 @@ catch(PDOException $e) {
 <html lang="nl" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="img/logo.png">
     <title>FashaHolic | Nieuwe gebruiker</title>
   </head>
   <body>

@@ -15,6 +15,7 @@
   </head>
   <body>
     <form class="" action="user.php" method="post">
+      <a href="index.php" class="fas fa-chevron-circle-left"></a>
       <img src="img/logo.png" alt="">
       <h1>Maak een Account</h1>
       <div class="box">
@@ -36,8 +37,9 @@
       <p class="policy">By clicking Sign up, You agree to our Terms
         and that you have read our Data Use Policy.
       </p>
-      <a href="login.php" class="register">Al een account? Login.<br></a>
+
       <input type="submit" name="" value="Registreer" class="submit">
+      <a href="login.php" class="register">Al een account? Login.<br></a>
     </form>
   </body>
 </html>

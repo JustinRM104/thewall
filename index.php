@@ -42,8 +42,8 @@ catch(PDOException $e) {
     <nav>
       <a href="#"><span class="fas fa-home"></span> Feed</a>
       <a href="#"><span class="fas fa-bookmark"></span> Bookmarks</a>
-      <a href="#"><span class="fas fa-user-cog"></span> Instellingen</a>
-      <a href="login.php"><span class="fas fa-sign-in-alt"></span> Login / Registreer</a>
+      <a href="#"><span class="fas fa-user-edit"></span> Profiel Instellingen</a>
+      <a href="login.php"><span class="fas fa-sign-in-alt"></span> Login</a>
     </nav>
 
     <div class="feed">

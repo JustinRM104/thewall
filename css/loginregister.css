@@ -5,6 +5,7 @@ body {
 }
 
 form {
+  position: relative;
   margin: 0 auto;
   width: 20em;
   text-align: center;
@@ -29,7 +30,7 @@ span {
 }
 
 .submit {
-  margin-top: 2em;
+  margin-top: 1em;
   padding: 1em;
   padding-right: 2em;
   padding-left: 2em;
@@ -78,7 +79,7 @@ p {
 .register {
   display: block;
   margin: .5em;
-  margin-bottom: -.5em;
+  margin-top: 1em;
   font-weight: bolder;
   text-decoration: none;
   color: rgba(179, 205, 229, 1);
@@ -91,4 +92,19 @@ p {
 .policy {
   text-align: center;
   color: rgba(100, 100, 100, 0.5);
+}
+
+.fa-chevron-circle-left {
+  position: absolute;
+  left: .5em;
+  top: .5em;
+  text-decoration: none;
+  color: rgba(29, 161, 242, .5);
+  font-size: 1.5em;
+  transition-duration: 0.4s;
+}
+
+.fa-chevron-circle-left:hover {
+  color: rgba(29, 161, 242, 1);
+  transition-duration: 0.4s;
 }

@@ -15,6 +15,7 @@
   </head>
   <body>
     <form class="" action="user.php" method="post">
+      <a href="index.php" class="fas fa-chevron-circle-left"></a>
       <img src="img/logo.png" alt="">
       <h1>Login</h1>
       <div class="box">
@@ -25,8 +26,8 @@
         <p>Wachtwoord<span>*</span></p>
         <input type="password" name="password" value="" placeholder="" required class="text">
       </div>
-      <a href="register.php" class="register">Of maak een account aan.<br></a>
       <input type="submit" name="" value="Login" class="submit">
+      <a href="register.php" class="register">Maak een account aan.<br></a>
     </form>
   </body>
 </html>
