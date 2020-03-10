@@ -74,3 +74,21 @@ p {
   text-align: left;
   font-weight: lighter;
 }
+
+.register {
+  display: block;
+  margin: .5em;
+  margin-bottom: -.5em;
+  font-weight: bolder;
+  text-decoration: none;
+  color: rgba(179, 205, 229, 1);
+}
+
+.register:hover {
+  text-decoration: underline;
+}
+
+.policy {
+  text-align: center;
+  color: rgba(100, 100, 100, 0.5);
+}

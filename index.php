@@ -30,6 +30,7 @@ catch(PDOException $e) {
     <meta name="description" content="">
 
     <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="shortcut icon" href="img/logo.png">
     <title>FashaHolic | Feed</title>
 
@@ -39,7 +40,10 @@ catch(PDOException $e) {
     <div class="bg"></div>
 
     <nav>
-
+      <a href="#"><span class="fas fa-home"></span> Feed</a>
+      <a href="#"><span class="fas fa-bookmark"></span> Bookmarks</a>
+      <a href="#"><span class="fas fa-user-cog"></span> Instellingen</a>
+      <a href="login.php"><span class="fas fa-sign-in-alt"></span> Login / Registreer</a>
     </nav>
 
     <div class="feed">

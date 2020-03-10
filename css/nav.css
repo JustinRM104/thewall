@@ -1,0 +1,25 @@
+nav {
+  position: fixed;
+  top: 10em;
+  left: 5%;
+  width: 15%;
+}
+
+nav a {
+  display: block;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 2em;
+  width: 100%;
+  color: rgba(29, 161, 242, .5);
+  text-decoration: none;
+  font-weight: bolder;
+  transition-duration: 0.4s;
+}
+
+nav a:hover {
+  background: rgba(29, 161, 242, 1);
+  color: white;
+  border-radius: 2em;
+  transition-duration: 0.4s;
+}
