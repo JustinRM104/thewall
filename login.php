@@ -14,7 +14,7 @@
     <script src="https://kit.fontawesome.com/7023acb312.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <form class="" action="user.php" method="post">
+    <form class="" action="login.php" method="post">
       <a href="index.php" class="fas fa-chevron-circle-left"></a>
       <img src="img/logo.png" alt="">
       <h1>Login</h1>

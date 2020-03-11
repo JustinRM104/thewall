@@ -56,7 +56,7 @@ catch(PDOException $e) {
         <input type="title" name="title" value="" placeholder="Titel" class="title" autocomplete="off" required>
         <textarea name="message" rows="8" cols="80" placeholder="Plaats een bericht" required></textarea>
         <div class="functions">
-          <input type="file" id="real-file" hidden="hidden" accept=".jpg .svg .jpeg" required>
+          <input type="file" id="real-file" hidden="hidden" enctype="multipart/form-data" accept=".jpg .svg .jpeg .png" required>
           <button type="button" id="custom-button">FOTO TOEVOEGEN</button>
           <span id="custom-text"></span>
         </div>

@@ -1,3 +1,67 @@
+<?php
+$hostname='localhost';
+$username='root';
+$password='';
+$database='project_thewall';
+
+try {
+  $connection = new PDO('mysql:host='.$hostname.';dbname='.$database, $username, $password);
+  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $accounts = $connection->query("SELECT * FROM accounts;");
+  $accountExists = false;
+  $emailExists = false;
+  $passwordsCorrect = true;
+  $error = false;
+
+  $username = NULL;
+  $email = NULL;
+  $password = NULL;
+  $confirmedPass = NULL;
+  $passwordHashed = NULL;
+
+  if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmedPass = $_POST['cpassword'];
+    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+
+    foreach ($accounts as $key => $row) {
+      if (strtolower($row["username"]) == strtolower($username)) {
+        $accountExists = true;
+      }
+      if (strtolower($row["email"]) == strtolower($email)) {
+        $emailExists = true;
+      }
+    }
+
+    if (!($password == $confirmedPass)) {
+      $passwordsCorrect = false;
+    }
+
+    if ($passwordsCorrect && !($accountExists || $emailExists)) {
+      //$sql = "INSERT INTO accounts (username, password, email) VALUES ($username, $passwordHashed, $email)";
+      try {
+        $sql = "INSERT INTO accounts (username, password, email) VALUES (?,?,?)";
+        $stmt= $connection->prepare($sql);
+        $stmt->execute([$username, $passwordHashed, $email]);
+        header("Location: index.php");
+      }
+      catch (PDOException $e) {
+        $error = true;
+      }
+    }
+  }
+}
+
+catch(PDOException $e) {
+  echo "Something gone wrong while connecting to the database.";
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="nl" dir="ltr">
   <head>
@@ -14,7 +78,7 @@
     <script src="https://kit.fontawesome.com/7023acb312.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <form class="" action="user.php" method="post">
+    <form class="" action="register.php" method="post">
       <a href="index.php" class="fas fa-chevron-circle-left"></a>
       <img src="img/logo.png" alt="">
       <h1>Maak een Account</h1>
@@ -38,7 +102,31 @@
         and that you have read our Data Use Policy.
       </p>
 
-      <input type="submit" name="" value="Registreer" class="submit">
+      <input type="submit" name="submit" value="Registreer" class="submit">
+
+       <?php
+       if ($accountExists) {
+         echo "
+         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Gebruikersnaam is al in gebruik.</p>
+         ";
+       }
+       if ($emailExists) {
+         echo "
+         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Email is al in gebruik.</p>
+         ";
+       }
+       if (!$passwordsCorrect) {
+         echo "
+         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Wachtwoorden komen niet overeen.</p>
+         ";
+       }
+       if ($error) {
+         echo "
+         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden..</p>
+         ";
+       }
+       ?>
+
       <a href="login.php" class="register">Al een account? Login.<br></a>
     </form>
   </body>
