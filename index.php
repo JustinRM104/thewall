@@ -41,6 +41,8 @@ catch(PDOException $e) {
     <div class="bg"></div>
 
     <nav>
+      <img src="img/defaultuser.jpg" alt="" class="myProfilePicture">
+      <h3 class="myUsername"> Username</h3>
       <a href="#"><span class="fas fa-home"></span> Feed</a>
       <a href="#"><span class="fas fa-bookmark"></span> Bookmarks</a>
       <a href="#"><span class="fas fa-user-edit"></span> Profiel Instellingen</a>
@@ -53,7 +55,7 @@ catch(PDOException $e) {
         <h2><span class="fas fa-comments"></span> Feed</h2>
       </div>
 
-      <form class="messageBox" action="index.html" method="post">
+      <form class="messageBox" action="index.html" method="POST">
         <input type="title" name="title" value="" placeholder="Titel" class="title" autocomplete="off" required>
         <textarea name="message" rows="8" cols="80" placeholder="Plaats een bericht" required></textarea>
         <div class="functions">
