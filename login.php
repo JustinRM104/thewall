@@ -9,8 +9,7 @@ try {
   $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   $accounts = $connection->query("SELECT * FROM accounts;");
-  $accountExists = false;
-  $emailExists = false;
+  $accountExists = true;
   $passwordsCorrect = true;
   $error = false;
 
@@ -19,7 +18,37 @@ try {
 
   if (isset($_POST['submit'])) {
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'];, PASSWORD_DEFAULT);
+    $password = $_POST['password'];
+
+    try {
+      $sql = "SELECT * FROM accounts WHERE username = :username";
+      $parameters = [
+        'username' => $username
+      ];
+      $stmt = $connection->prepare($sql);
+      $stmt->execute($parameters);
+
+      if ($stmt->rowCount() === 1 ) {
+        $user = $stmt->fetch();
+        if (password_verify($password, $user['password'])) {
+          session_start();
+          $_SESSION['userid'] = $user['id'];
+          $_SESSION['username'] = $user['username'];
+          header("Location: index.php");
+          exit;
+        }
+        else {
+          $passwordsCorrect = false;
+        }
+      }
+      else {
+        $accountExists = false;
+      }
+    }
+    catch (PDOException $e) {
+      $error = true;
+    }
+
   }
 }
 
@@ -58,7 +87,24 @@ catch(PDOException $e) {
         <p>Wachtwoord<span>*</span></p>
         <input type="password" name="password" value="" placeholder="" required class="text">
       </div>
-      <input type="submit" name="" value="Login" class="submit">
+      <input type="submit" name="submit" value="Login" class="submit">
+      <?php
+      if (!$accountExists) {
+        echo "
+        <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Account bestaat niet.</p>
+        ";
+      }
+      if (!$passwordsCorrect) {
+        echo "
+        <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Het wachtwoord is onjuist.</p>
+        ";
+      }
+      if ($error) {
+        echo "
+        <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>
+        ";
+      }
+      ?>
       <a href="register.php" class="register">Maak een account aan.<br></a>
     </form>
   </body>

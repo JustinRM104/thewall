@@ -13,6 +13,7 @@ try {
   $emailExists = false;
   $passwordsCorrect = true;
   $error = false;
+  $minLength = true;
 
   $username = NULL;
   $email = NULL;
@@ -40,13 +41,18 @@ try {
       $passwordsCorrect = false;
     }
 
-    if ($passwordsCorrect && !($accountExists || $emailExists)) {
+    if (strlen($password) < 5) {
+      $minLength = false;
+    }
+
+    if ($minLength && $passwordsCorrect && !($accountExists || $emailExists)) {
       //$sql = "INSERT INTO accounts (username, password, email) VALUES ($username, $passwordHashed, $email)";
       try {
-        $sql = "INSERT INTO accounts (username, password, email) VALUES (?,?,?)";
+        $sql = "INSERT INTO accounts (username, `password`, email) VALUES (?,?,?)";
         $stmt= $connection->prepare($sql);
         $stmt->execute([$username, $passwordHashed, $email]);
         header("Location: index.php");
+        exit;
       }
       catch (PDOException $e) {
         $error = true;
@@ -120,9 +126,14 @@ catch(PDOException $e) {
          <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Wachtwoorden komen niet overeen.</p>
          ";
        }
-       if ($error == true) {
+       if ($error) {
          echo "
-         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden..</p>
+         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>
+         ";
+       }
+       if (!$minLength) {
+         echo "
+         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Het wachtwoord moet minimaal uit 5 karakters bestaan.</p>
          ";
        }
        ?>

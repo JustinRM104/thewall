@@ -1,4 +1,5 @@
 <?php
+session_start();
 $hostname='localhost';
 $username='root';
 $password='';
@@ -10,7 +11,7 @@ try {
 
   // Tabellen
   $allPosts = $connection->query("SELECT * FROM uploads;");
-
+  echo $_SESSION["userid"];
   // Data van registratie
 
 }
