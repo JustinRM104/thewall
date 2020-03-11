@@ -7,8 +7,8 @@ nav {
 
 nav a {
   display: block;
-  margin: 1em;
-  padding: 1em;
+  margin: .5em;
+  padding: .7em;
   border-radius: 2em;
   width: 100%;
   color: rgba(29, 161, 242, .5);
@@ -21,6 +21,19 @@ nav a {
 nav a:hover {
   background: rgba(29, 161, 242, 1);
   color: white;
-  border-radius: 2em;
+  border-radius: 1.75em;
   transition-duration: 0.4s;
+}
+
+.myProfilePicture {
+  margin-left: 2em;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+}
+
+.myUsername {
+  margin-top: -2.7rem;
+  margin-left: 6.5rem;
+  margin-bottom: 2em;
 }

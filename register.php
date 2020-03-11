@@ -43,7 +43,7 @@ try {
     if ($passwordsCorrect && !($accountExists || $emailExists)) {
       //$sql = "INSERT INTO accounts (username, password, email) VALUES ($username, $passwordHashed, $email)";
       try {
-        $sql = "INSERT INTO accounts (username, password, email) VALUES (?,?,?)";
+        $sql = "INSERT INTO accounts (username, `password`, email) VALUES (?,?,?)";
         $stmt= $connection->prepare($sql);
         $stmt->execute([$username, $passwordHashed, $email]);
         header("Location: index.php");
