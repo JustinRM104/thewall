@@ -120,7 +120,7 @@ catch(PDOException $e) {
          <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Wachtwoorden komen niet overeen.</p>
          ";
        }
-       if ($error) {
+       if ($error == true) {
          echo "
          <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden..</p>
          ";

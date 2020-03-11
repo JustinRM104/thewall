@@ -1,3 +1,35 @@
+<?php
+$hostname='localhost';
+$username='root';
+$password='';
+$database='project_thewall';
+
+try {
+  $connection = new PDO('mysql:host='.$hostname.';dbname='.$database, $username, $password);
+  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $accounts = $connection->query("SELECT * FROM accounts;");
+  $accountExists = false;
+  $emailExists = false;
+  $passwordsCorrect = true;
+  $error = false;
+
+  $username = NULL;
+  $password = NULL;
+
+  if (isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'];, PASSWORD_DEFAULT);
+  }
+}
+
+catch(PDOException $e) {
+  echo "Something gone wrong while connecting to the database.";
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="nl" dir="ltr">
   <head>
