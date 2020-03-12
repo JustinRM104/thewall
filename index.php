@@ -1,5 +1,4 @@
 <?php
-session_start();
 $hostname='localhost';
 $username='root';
 $password='';
@@ -11,12 +10,17 @@ try {
 
   // Tabellen
   $allPosts = $connection->query("SELECT * FROM uploads;");
-  echo $_SESSION["userid"];
+  $loggedIn = false;
+
+  session_start();
+  if (isset($_SESSION['userid'])) {
+    $loggedIn = true;
+  }
   // Data van registratie
 
 }
 catch(PDOException $e) {
-  echo "Something gone wrong while connecting to the database.";
+  echo "<p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>";
   exit;
 }
 ?>
@@ -41,12 +45,29 @@ catch(PDOException $e) {
     <div class="bg"></div>
 
     <nav>
-      <img src="img/defaultuser.jpg" alt="" class="myProfilePicture">
-      <h3 class="myUsername"> Username</h3>
+      <?php
+      if ($loggedIn) {
+        if (isset($_SESSION['pf'])) {
+          ?><img src="profilepictures/<?php $_SESSION['pf'] ?>" alt="" class="myProfilePicture"><?php
+        }
+        else {
+          ?><img src="img/defaultuser.jpg" alt="profilepicture" class="myProfilePicture"><?php
+        }
+        ?><h3 class="myUsername"> <?php echo ucfirst($_SESSION['username']); ?></h3><?php
+      }
+
+      ?>
       <a href="#"><span class="fas fa-home"></span> Feed</a>
       <a href="#"><span class="fas fa-bookmark"></span> Bookmarks</a>
       <a href="#"><span class="fas fa-user-edit"></span> Profiel Instellingen</a>
-      <a href="login.php"><span class="fas fa-sign-in-alt"></span> Login</a>
+      <?php
+      if ($loggedIn) {
+        ?><a href="logout.php"><span class="fas fa-sign-in-alt"></span> Uitloggen</a><?php
+      }
+      else {
+        ?><a href="login.php"><span class="fas fa-sign-in-alt"></span> Inloggen</a><?php
+      }
+      ?>
     </nav>
 
     <div class="feed">

@@ -26,14 +26,21 @@ nav a:hover {
 }
 
 .myProfilePicture {
-  margin-left: 2em;
+  margin-left: 1em;
   border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .myUsername {
-  margin-top: -2.7rem;
-  margin-left: 6.5rem;
+  width: 100%;
+  background: rgba(29, 161, 242, .75);
+  color: white;
+  margin-top: -2.55rem;
+  padding-left: 4.75rem;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  border-radius: 2em;
   margin-bottom: 2em;
+  font-size: 1.25em;
 }

@@ -34,6 +34,7 @@ try {
           session_start();
           $_SESSION['userid'] = $user['id'];
           $_SESSION['username'] = $user['username'];
+          $_SESSION['pf'] = $user['profilepicture'];
           header("Location: index.php");
           exit;
         }
@@ -53,7 +54,7 @@ try {
 }
 
 catch(PDOException $e) {
-  echo "Something gone wrong while connecting to the database.";
+  echo "<p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>";
   exit;
 }
 

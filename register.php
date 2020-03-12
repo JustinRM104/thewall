@@ -51,6 +51,18 @@ try {
         $sql = "INSERT INTO accounts (username, `password`, email) VALUES (?,?,?)";
         $stmt= $connection->prepare($sql);
         $stmt->execute([$username, $passwordHashed, $email]);
+
+        session_start();
+        $sql2 = "SELECT * FROM accounts WHERE username = :username";
+        $parameters = [
+          'username' => $username
+        ];
+        $stmt2 = $connection->prepare($sql2);
+        $stmt2->execute($parameters);
+        $user = $stmt2->fetch();
+        $_SESSION['userid'] = $user['id'];
+        $_SESSION['username'] = $username;
+        
         header("Location: index.php");
         exit;
       }
@@ -62,7 +74,7 @@ try {
 }
 
 catch(PDOException $e) {
-  echo "Something gone wrong while connecting to the database.";
+  echo "<p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>";
   exit;
 }
 
