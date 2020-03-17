@@ -14,6 +14,7 @@ try {
   $passwordsCorrect = true;
   $error = false;
   $minLength = true;
+  $maxLength = true;
 
   $username = NULL;
   $email = NULL;
@@ -44,6 +45,9 @@ try {
     if (strlen($password) < 5) {
       $minLength = false;
     }
+    elseif (strlen($password) > 25) {
+      $maxLength = false;
+    }
 
     if ($minLength && $passwordsCorrect && !($accountExists || $emailExists)) {
       //$sql = "INSERT INTO accounts (username, password, email) VALUES ($username, $passwordHashed, $email)";
@@ -62,7 +66,7 @@ try {
         $user = $stmt2->fetch();
         $_SESSION['userid'] = $user['id'];
         $_SESSION['username'] = $username;
-        
+
         header("Location: index.php");
         exit;
       }
@@ -106,7 +110,7 @@ catch(PDOException $e) {
       </div>
       <div class="box">
         <p>Email<span>*</span></p>
-        <input type="email" name="email" value="" placeholder="" required class="text">
+        <input type="email" name="email" value="" placeholder="" autocomplete="off" required class="text">
       </div>
       <div class="box">
         <p>Wachtwoord<span>*</span></p>
@@ -146,6 +150,11 @@ catch(PDOException $e) {
        if (!$minLength) {
          echo "
          <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Het wachtwoord moet minimaal uit 5 karakters bestaan.</p>
+         ";
+       }
+       if (!$maxLength) {
+         echo "
+         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Het wachtwoord mag maximaan uit 20 karakters bestaan</p>
          ";
        }
        ?>

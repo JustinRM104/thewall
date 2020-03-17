@@ -57,7 +57,7 @@ catch(PDOException $e) {
       }
 
       ?>
-      <a href="#"><span class="fas fa-home"></span> Feed</a>
+      <a href="index.php"><span class="fas fa-home"></span> Feed</a>
       <a href="#"><span class="fas fa-bookmark"></span> Bookmarks</a>
       <a href="#"><span class="fas fa-user-edit"></span> Profiel Instellingen</a>
       <?php
@@ -76,17 +76,23 @@ catch(PDOException $e) {
         <h2><span class="fas fa-comments"></span> Feed</h2>
       </div>
 
-      <form class="messageBox" action="index.html" method="POST">
-        <input type="title" name="title" value="" placeholder="Titel" class="title" autocomplete="off" required>
-        <textarea name="message" rows="8" cols="80" placeholder="Plaats een bericht" required></textarea>
-        <div class="functions">
-          <input type="file" id="real-file" hidden="hidden" enctype="multipart/form-data" accept=".jpg .svg .jpeg .png" required>
-          <button type="button" id="custom-button">FOTO TOEVOEGEN</button>
-          <span id="custom-text"></span>
-        </div>
-        <a href="#temp"><span class="far fa-paper-plane send"></span> Plaats</a>
-      </form>
+      <?php
+      if ($loggedIn) {
+        ?>
+        <form class="messageBox" action="post.php" method="POST">
+          <input type="title" name="title" value="" placeholder="Titel" class="title" autocomplete="off" required>
+          <textarea name="message" rows="8" cols="80" placeholder="Plaats een bericht" required></textarea>
+          <div class="functions">
+            <input type="file" id="real-file" hidden="hidden" enctype="multipart/form-data" accept="image/*">
+            <button type="button" id="custom-button">FOTO TOEVOEGEN</button>
+            <span id="custom-text"></span>
+          </div>
+          <input type="submit" name="submit" value="Plaatsen" class="post">
+        </form>
+        <?php
+      }
 
+      ?>
       <div class="posts">
         <?php
         foreach ($allPosts as $key => $row) {
@@ -97,13 +103,16 @@ catch(PDOException $e) {
               <h5 class="fas fa-bookmark save"> <span></span></h5>
             </div>
             <img src="img/defaultuser.jpg" alt="" class="profilePicture">
-            <h2><?php echo $row["auteur"] ?><span> · 2 mar. 2020</span></h2>
+            <h2><?php echo $row["auteur"] ?><span><?php echo substr($row["date"], 5, 5); echo " · "; echo substr($row["date"], 10, 6); ?></span></h2>
 
-            <?php if (substr($row["image"], 0, 4) == "http") {
-              ?> <img src="<?php echo $row["image"] ?>" alt="<?php echo $row["auteur"] ?>" class="postImg"> <?php
-            }
-            else {
-              ?> <img src="postimages/<?php echo $row["image"] ?>" alt="<?php echo $row["auteur"] ?>" class="postImg"> <?php
+            <?php
+            if (!$row['image'] == NULL) {
+              if (substr($row["image"], 0, 4) == "http") {
+                ?> <img src="<?php echo $row["image"] ?>" alt="<?php echo $row["auteur"] ?>" class="postImg"> <?php
+              }
+              else {
+                ?> <img src="postimages/<?php echo $row["image"] ?>" alt="<?php echo $row["auteur"] ?>" class="postImg"> <?php
+              }
             } ?>
             <h3><?php echo $row["titel"] ?></h3>
             <p><?php echo $row["caption"] ?></p>

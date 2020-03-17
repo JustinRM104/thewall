@@ -109,7 +109,7 @@ html {
 }
 .messageBox .title:focus {border-bottom: 0.1em solid rgba(179, 205, 229, 1);}
 .messageBox textarea:focus {border-bottom: 0.1em solid rgba(179, 205, 229, 1);}
-.messageBox a {
+.messageBox .post {
   margin: 2em;
   margin-top: -3em;
   margin-right: 5%;
@@ -124,8 +124,11 @@ html {
   font-weight: bold;
   background: rgba(29, 161, 242, 1);
   transition-duration: 0.4s;
+  outline: none;
+  border: 0;
+  cursor: pointer;
 }
-.messageBox a:hover {opacity: 1; transition-duration: 0.4s;}
+.messageBox .post:hover {opacity: 1; transition-duration: 0.4s;}
 
 .functions {
   width: 100%;
@@ -178,7 +181,7 @@ html {
 
 /* NOTE: Gebruiker van post */
 section h2 {margin-top: -1.75em; margin-left: 3em; color: black; font-weight: bold;}
-section h2 span {font-size: 0.5em; color: rgba(200, 200, 200, 1); font-weight: lighter;}
+section h2 span {padding-left: 1em; font-size: 0.5em; color: rgba(200, 200, 200, 1); font-weight: lighter;}
 
 /* NOTE: Titel post */
 section h3 {
