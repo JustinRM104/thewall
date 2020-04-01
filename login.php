@@ -1,60 +1,64 @@
 <?php
-$hostname='localhost';
-$username='root';
-$password='';
-$database='project_thewall';
+require 'server/functions.php';
+$connection = dbConnect();
+
+$data = array(
+  "loggedIn"=> false,
+  "error"=> false
+);
+
+$formData = array(
+  'accountExists' => true,
+  'passwordCorrect' => true
+);
+
+$username = NULL;
+$password = NULL;
 
 try {
-  $connection = new PDO('mysql:host='.$hostname.';dbname='.$database, $username, $password);
-  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+  // Get accounts
   $accounts = $connection->query("SELECT * FROM accounts;");
-  $accountExists = true;
-  $passwordsCorrect = true;
-  $error = false;
 
-  $username = NULL;
-  $password = NULL;
-
+  // Check if sumbitted
   if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     try {
       $sql = "SELECT * FROM accounts WHERE username = :username";
-      $parameters = [
-        'username' => $username
-      ];
+      $parameters = ['username' => $username];
       $stmt = $connection->prepare($sql);
       $stmt->execute($parameters);
 
       if ($stmt->rowCount() === 1 ) {
         $user = $stmt->fetch();
+
         if (password_verify($password, $user['password'])) {
+
           session_start();
-          $_SESSION['userid'] = $user['id'];
+          $_SESSION['user_id'] = $user['id'];
           $_SESSION['username'] = $user['username'];
-          $_SESSION['pf'] = $user['profilepicture'];
+
           header("Location: index.php");
           exit;
         }
         else {
-          $passwordsCorrect = false;
+          $formData["passwordCorrect"] = false;
         }
       }
       else {
-        $accountExists = false;
+        $formData["accountExists"] = false;
       }
     }
     catch (PDOException $e) {
-      $error = true;
+      $data["error"] = true;
     }
 
   }
 }
 
 catch(PDOException $e) {
-  echo "<p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>";
+  header("Location: index.php");
   exit;
 }
 
@@ -82,30 +86,34 @@ catch(PDOException $e) {
       <h1>Login</h1>
       <div class="box">
         <p>Gebruikersnaam<span>*</span></p>
-        <input type="text" name="username" value="" placeholder="" autocomplete="off" required class="text">
+        <input type="text" name="username" value="<?php if ($username) {echo $username;} ?>" placeholder="" autocomplete="nickname" required class="text">
       </div>
       <div class="box">
         <p>Wachtwoord<span>*</span></p>
         <input type="password" name="password" value="" placeholder="" required class="text">
       </div>
       <input type="submit" name="submit" value="Login" class="submit">
+
       <?php
-      if (!$accountExists) {
+      if (!$formData["accountExists"]) {
         echo "
         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Account bestaat niet.</p>
         ";
       }
-      if (!$passwordsCorrect) {
+
+      if (!$formData["passwordCorrect"]) {
         echo "
         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Het wachtwoord is onjuist.</p>
         ";
       }
-      if ($error) {
+
+      if ($data["error"]) {
         echo "
         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>
         ";
       }
       ?>
+
       <a href="register.php" class="register">Maak een account aan.<br></a>
     </form>
   </body>

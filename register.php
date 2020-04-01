@@ -1,84 +1,93 @@
 <?php
-$hostname='localhost';
-$username='root';
-$password='';
-$database='project_thewall';
+require 'server/functions.php';
+$connection = dbConnect();
+
+$data = array(
+  "loggedIn"=> false,
+  "error"=> false
+);
+
+$formData = array(
+  'nameExists' => false,
+  'emailExists' => false,
+  'min' => true,
+  'max' => true,
+  'emailCorrect' => true,
+  'passwordCorrect' => true
+);
 
 try {
-  $connection = new PDO('mysql:host='.$hostname.';dbname='.$database, $username, $password);
-  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+  // Get $accounts
   $accounts = $connection->query("SELECT * FROM accounts;");
-  $accountExists = false;
-  $emailExists = false;
-  $passwordsCorrect = true;
-  $error = false;
-  $minLength = true;
-  $maxLength = true;
+
+  // Session Check
+  session_start();
+  if (isset($_SESSION['user_id'])) {
+    $data["loggedIn"] = true;
+
+    header("Location: index.php");
+    exit;
+  }
 
   $username = NULL;
   $email = NULL;
   $password = NULL;
-  $confirmedPass = NULL;
+  $confirmPassword = NULL;
   $passwordHashed = NULL;
 
+  // Check if user submitted
   if (isset($_POST['submit'])) {
+    // Data
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $confirmedPass = $_POST['cpassword'];
+    $confirmPassword = $_POST['cpassword'];
     $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
 
-    foreach ($accounts as $key => $row) {
-      if (strtolower($row["username"]) == strtolower($username)) {
-        $accountExists = true;
-      }
-      if (strtolower($row["email"]) == strtolower($email)) {
-        $emailExists = true;
-      }
+    // Check name and email
+    $formData["nameExists"] = checkUsername($username, $connection);
+    $formData["emailExists"] = checkEmail($email, $connection);
+
+    // Check pass length
+    $length = checkPassLength($password);
+    $formData["min"] = $length[0];
+    $formData["max"] = $length[1];
+
+    // Check pass
+    if (!($password == $confirmPassword)) {
+      $formData["passwordCorrect"] = false;
     }
 
-    if (!($password == $confirmedPass)) {
-      $passwordsCorrect = false;
-    }
-
-    if (strlen($password) < 5) {
-      $minLength = false;
-    }
-    elseif (strlen($password) > 25) {
-      $maxLength = false;
-    }
-
-    if ($minLength && $passwordsCorrect && !($accountExists || $emailExists)) {
-      //$sql = "INSERT INTO accounts (username, password, email) VALUES ($username, $passwordHashed, $email)";
+    // Lets register the user if no errors
+    if (($formData["min"] && $formData["max"] && $formData["passwordCorrect"]) && !($formData["nameExists"] || $formData["emailExists"])) {
       try {
-        $sql = "INSERT INTO accounts (username, `password`, email) VALUES (?,?,?)";
+        $sql = "INSERT INTO accounts (username, email, `password`) VALUES (?,?,?)";
         $stmt= $connection->prepare($sql);
-        $stmt->execute([$username, $passwordHashed, $email]);
+        $stmt->execute([$username, $email, $passwordHashed]);
 
-        session_start();
         $sql2 = "SELECT * FROM accounts WHERE username = :username";
-        $parameters = [
-          'username' => $username
-        ];
+        $parameters = ['username' => $username];
         $stmt2 = $connection->prepare($sql2);
         $stmt2->execute($parameters);
         $user = $stmt2->fetch();
-        $_SESSION['userid'] = $user['id'];
+
+        session_start();
+        $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $username;
 
         header("Location: index.php");
         exit;
+
+      } catch (PDOException $e) {
+        $data["error"] = true;
       }
-      catch (PDOException $e) {
-        $error = true;
-      }
+
     }
   }
-}
 
-catch(PDOException $e) {
-  echo "<p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>";
+} catch(PDOException $e) {
+  // We sturen gebruiker terug naar home pagina.
+  header("Location: index.php");
   exit;
 }
 
@@ -106,55 +115,52 @@ catch(PDOException $e) {
       <h1>Maak een Account</h1>
       <div class="box">
         <p>Gebruikersnaam<span>*</span></p>
-        <input type="text" name="username" value="" placeholder="" autocomplete="off" required class="text">
+        <input type="text" name="username" value="<?php if ($username) {echo $username;} ?>" autocomplete="nickname" required class="text">
       </div>
       <div class="box">
         <p>Email<span>*</span></p>
-        <input type="email" name="email" value="" placeholder="" autocomplete="off" required class="text">
+        <input type="email" name="email" value="<?php if ($email) {echo $email;} ?>" autocomplete="email" required class="text">
       </div>
       <div class="box">
         <p>Wachtwoord<span>*</span></p>
-        <input type="password" name="password" value="" placeholder="" required class="text">
+        <input type="password" name="password" value="" required class="text">
       </div>
       <div class="box">
         <p>Bevestig wachtwoord<span>*</span></p>
-        <input type="password" name="cpassword" value="" placeholder="" required class="text">
+        <input type="password" name="cpassword" value="" required class="text">
       </div>
-      <p class="policy">By clicking Sign up, You agree to our Terms
-        and that you have read our Data Use Policy.
-      </p>
+      <p class="policy">Door te registreren gaat u akkoord met onze algemene voorwaarden.</p>
 
       <input type="submit" name="submit" value="Registreer" class="submit">
 
        <?php
-       if ($accountExists) {
+       if ($formData["nameExists"]) {
          echo "
          <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Gebruikersnaam is al in gebruik.</p>
          ";
        }
-       if ($emailExists) {
+
+       if ($formData["emailExists"]) {
          echo "
          <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Email is al in gebruik.</p>
          ";
        }
-       if (!$passwordsCorrect) {
+
+       if (!$formData["passwordCorrect"]) {
          echo "
          <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Wachtwoorden komen niet overeen.</p>
          ";
        }
-       if ($error) {
+
+       if (!$formData["min"] || !$formData["max"]) {
+         echo "
+         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Het wachtwoord moet tussen de 5 en 20 karakters bestaan.</p>
+         ";
+       }
+
+       if ($data["error"]) {
          echo "
          <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>
-         ";
-       }
-       if (!$minLength) {
-         echo "
-         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Het wachtwoord moet minimaal uit 5 karakters bestaan.</p>
-         ";
-       }
-       if (!$maxLength) {
-         echo "
-         <p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Het wachtwoord mag maximaan uit 20 karakters bestaan</p>
          ";
        }
        ?>

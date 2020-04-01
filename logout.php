@@ -1,13 +1,8 @@
 <?php
-$hostname='localhost';
-$username='root';
-$password='';
-$database='project_thewall';
+require 'server/functions.php';
+$connection = dbConnect();
 
 try {
-  $connection = new PDO('mysql:host='.$hostname.';dbname='.$database, $username, $password);
-  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
   session_start();
   session_destroy();
 
@@ -15,7 +10,7 @@ try {
 }
 
 catch(PDOException $e) {
-  echo "<p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>";
+  header("Location: index.php");
   exit;
 }
 

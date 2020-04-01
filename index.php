@@ -1,28 +1,26 @@
 <?php
-$hostname='localhost';
-$username='root';
-$password='';
-$database='project_thewall';
+require 'server/functions.php';
+$connection = dbConnect();
+
+$data = array(
+  "loggedIn"=> false,
+  "error"=> false
+);
 
 try {
-  $connection = new PDO('mysql:host='.$hostname.';dbname='.$database, $username, $password);
-  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  // Get all posts
+  $posts = $connection->query("SELECT * FROM uploads ORDER BY id DESC");
 
-  // Tabellen
-  $allPosts = $connection->query("SELECT * FROM uploads;");
-  $loggedIn = false;
-
+  // Session Check
   session_start();
-  if (isset($_SESSION['userid'])) {
-    $loggedIn = true;
+  if (isset($_SESSION['user_id'])) {
+    $data["loggedIn"] = true;
   }
-  // Data van registratie
 
+} catch(PDOException $e) {
+  $data["error"] = true;
 }
-catch(PDOException $e) {
-  echo "<p style=\"color: red; text-align: center; margin-top: 1em; text-shadow: 0px 0px .5em #ff9999;\">Er is een onbekende fout opgetreden.</p>";
-  exit;
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -44,11 +42,11 @@ catch(PDOException $e) {
   <body>
     <div class="bg"></div>
 
-    <nav>
+    <nav class="desktop">
       <?php
-      if ($loggedIn) {
-        if (isset($_SESSION['pf'])) {
-          ?><img src="profilepictures/<?php $_SESSION['pf'] ?>" alt="" class="myProfilePicture"><?php
+      if ($data["loggedIn"]) {
+        if (file_exists('profilepictures/' . $_SESSION['username'])) {
+          ?><img src="profilepictures/<?php $_SESSION['username']; ?>" alt="profilepicture" class="myProfilePicture"><?php
         }
         else {
           ?><img src="img/defaultuser.jpg" alt="profilepicture" class="myProfilePicture"><?php
@@ -61,13 +59,18 @@ catch(PDOException $e) {
       <a href="#"><span class="fas fa-bookmark"></span> Bookmarks</a>
       <a href="#"><span class="fas fa-user-edit"></span> Profiel Instellingen</a>
       <?php
-      if ($loggedIn) {
+
+      if ($data["loggedIn"]) {
         ?><a href="logout.php"><span class="fas fa-sign-in-alt"></span> Uitloggen</a><?php
       }
       else {
         ?><a href="login.php"><span class="fas fa-sign-in-alt"></span> Inloggen</a><?php
       }
       ?>
+    </nav>
+
+    <nav class="mobile">
+
     </nav>
 
     <div class="feed">
@@ -77,17 +80,16 @@ catch(PDOException $e) {
       </div>
 
       <?php
-      if ($loggedIn) {
+      if ($data["loggedIn"]) {
         ?>
         <form class="messageBox" action="post.php" method="POST">
           <input type="title" name="title" value="" placeholder="Titel" class="title" autocomplete="off" required>
-          <textarea name="message" rows="8" cols="80" placeholder="Plaats een bericht" required></textarea>
+          <textarea name="message" rows="8" cols="80" placeholder="Deel een bericht" required></textarea>
           <div class="functions">
             <input type="file" id="real-file" hidden="hidden" enctype="multipart/form-data" accept="image/*">
-            <button type="button" id="custom-button">FOTO TOEVOEGEN</button>
-            <span id="custom-text"></span>
+            <button type="button" id="custom-button">Foto toevoegen</button>
+            <input type="submit" name="submit" value="Plaatsen" class="post">
           </div>
-          <input type="submit" name="submit" value="Plaatsen" class="post">
         </form>
         <?php
       }
@@ -95,26 +97,27 @@ catch(PDOException $e) {
       ?>
       <div class="posts">
         <?php
-        foreach ($allPosts as $key => $row) {
+        foreach ($posts as $key => $row) {
           ?>
           <section>
             <div class="icons">
-              <h5 class="fas fa-heart like"> <span><?php echo $row["Likes"] ?></span></h5>
+              <h5 class="fas fa-heart like"> <span><?php echo $row["likes"] ?></span></h5>
               <h5 class="fas fa-bookmark save"> <span></span></h5>
             </div>
-            <img src="img/defaultuser.jpg" alt="" class="profilePicture">
-            <h2><?php echo $row["auteur"] ?><span><?php echo substr($row["date"], 5, 5); echo " · "; echo substr($row["date"], 10, 6); ?></span></h2>
 
             <?php
+              ?><img src="img/defaultuser.jpg" alt="profilepicture" class="profilePicture"><?php
+            ?>
+
+            <h2><?php echo $row["author_name"] . "<br>"?><span><?php echo $row["date"]; ?></span></h2>
+
+            <?php
+
             if (!$row['image'] == NULL) {
-              if (substr($row["image"], 0, 4) == "http") {
-                ?> <img src="<?php echo $row["image"] ?>" alt="<?php echo $row["auteur"] ?>" class="postImg"> <?php
-              }
-              else {
-                ?> <img src="postimages/<?php echo $row["image"] ?>" alt="<?php echo $row["auteur"] ?>" class="postImg"> <?php
-              }
+              ?> <img src="postimages/<?php echo $row["image"] ?>" alt="<?php echo $row["author_name"] ?>" class="postImg"> <?php
             } ?>
-            <h3><?php echo $row["titel"] ?></h3>
+
+            <h3><?php echo $row["title"] ?></h3>
             <p><?php echo $row["caption"] ?></p>
           </section>
           <?php
@@ -127,6 +130,10 @@ catch(PDOException $e) {
 
     </div>
 
-    <script src="js/upload.js"></script>
+    <?php
+    if ($data["loggedIn"]) {
+      ?><script src="js/upload.js"></script><?php
+    }
+    ?>
   </body>
 </html>

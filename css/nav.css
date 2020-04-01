@@ -1,11 +1,11 @@
-nav {
+.desktop {
   position: fixed;
   top: 2em;
   left: 5%;
   width: 15%;
 }
 
-nav a {
+.desktop a {
   display: block;
   margin: .5em;
   padding: .7em;
@@ -18,7 +18,7 @@ nav a {
   transition-duration: 0.4s;
 }
 
-nav a:hover {
+.desktop a:hover {
   background: rgba(29, 161, 242, 1);
   color: white;
   border-radius: 1.75em;
