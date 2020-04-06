@@ -37,6 +37,7 @@ try {
     <link rel="shortcut icon" href="img/logo.png">
     <title>FashaHolic | Feed</title>
 
+    
     <script src="https://kit.fontawesome.com/7023acb312.js" crossorigin="anonymous"></script>
   </head>
   <body>
